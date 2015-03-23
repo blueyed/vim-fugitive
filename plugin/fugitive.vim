@@ -854,7 +854,7 @@ function! s:StageDiff(diff) abort
 endfunction
 
 function! s:StageDiffTab(diff) abort
-  execute 'tab split'
+  execute tabpagenr()-1 . 'tab split'
   return s:StageDiff(a:diff)
 endfunction
 
@@ -1598,7 +1598,7 @@ endfunction
 call s:command("-bang -bar -nargs=* -complete=customlist,s:EditComplete Gdiff :execute s:Diff('',<f-args>)")
 call s:command("-bar -nargs=* -complete=customlist,s:EditComplete Gvdiff :execute s:Diff('keepalt vert ',<f-args>)")
 call s:command("-bar -nargs=* -complete=customlist,s:EditComplete Gsdiff :execute s:Diff('keepalt ',<f-args>)")
-call s:command("-bar -nargs=* -complete=customlist,s:EditComplete Gtdiff :tabnew %|execute s:Diff(0,<f-args>)")
+call s:command("-bar -nargs=* -complete=customlist,s:EditComplete Gtdiff :execute tabpagenr()-1 . 'tab split' | execute s:Diff(0,<f-args>)")
 
 augroup fugitive_diff
   autocmd!
